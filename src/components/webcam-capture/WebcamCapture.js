@@ -4,6 +4,7 @@ import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import { useDispatch } from 'react-redux';
 import { setCameraImage } from '../../features/cameraSlice';
 import { useHistory } from 'react-router-dom';
+import './WebcamCapture.css'
 
 // video size
 const videoConstraints = {

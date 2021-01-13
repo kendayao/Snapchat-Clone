@@ -39,7 +39,7 @@ function Login() {
     const [openLogIn, setOpenLogIn]=useState(false);
     const [OpenSignUp, setOpenSignUp]=useState(false);
 
-    const signIn=()=>{
+    const signInWithGoogle=()=>{
         auth.signInWithPopup(provider)
         .then(result=>{
             dispatch(login({
@@ -74,9 +74,9 @@ function Login() {
               <label>PASSWORD</label>
               <input ></input>
               <button className="login__modalButton" type="submit">Log In</button>
-              <button className="login__modalGoogleLogIn" type="submit">Log in with google</button>
               <p className="login__modalText">Don't have an account?<span className="login__modal-link"> Sign Up</span></p>
             </form>
+            <button className="login__modalGoogleLogIn" onClick={signInWithGoogle}>Log in with google</button>
            </div>
          </div>
       </Modal>

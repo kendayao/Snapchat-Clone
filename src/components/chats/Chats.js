@@ -16,6 +16,7 @@ import { resetCameraImage } from '../../features/cameraSlice';
 function Chats() {
 
     const [posts, setPosts]=useState([]);
+    const [friend, setFriend]=useState('')
     const user = useSelector(selectUser);
     const dispatch=useDispatch();
     const history=useHistory();
@@ -29,12 +30,17 @@ function Chats() {
         )
     },[])
 
-    console.log(posts)
+    const handleChange=event=>{
+        setFriend(event.target.value)
+    }
+
 
     const takeSnap = ()=>{
         dispatch(resetCameraImage());
         history.push('/')
     }
+
+    const filteredPosts=posts.filter(post=>post.data.username.toLowerCase().includes(friend.toLowerCase()))
 
     return (
         <div className='chats'>
@@ -42,12 +48,12 @@ function Chats() {
                 <Avatar src={user.profilePic} onClick={()=>auth.signOut()} className='chats__avatar'/>
                 <div className='chats__search'>
                     <SearchIcon className='chats__searchIcon' />
-                    <input placeholder="Friends" type="text"/>
+                    <input placeholder="Friends" onChange={handleChange} value={friend} type="text" />
                 </div>
                 <ChatBubbleIcon className='chats_chatIcon' />
             </div>
             <div className='chats__posts'>
-                {posts.map(post=>(
+                {filteredPosts.map(post=>(
                     <Chat
                         key={post.id}
                         id={post.id}

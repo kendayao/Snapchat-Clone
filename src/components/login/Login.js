@@ -104,6 +104,8 @@ function Login() {
               <input id='email' type='email' value={email} onChange={event=>setEmail(event.target.value)}></input>
               <label htmlFor='password'>PASSWORD</label>
               <input id='password' type='password' value={password} onChange={event=>setPassword(event.target.value)}></input>
+              <p className='login__modal-p'>*You may use the following credentials to login or click on signup to create your own*</p>
+              <p className='login__modal-p'>email: cool_coder@email.com password: 12341234</p>
               <button className="login__modalButton" type="submit" onClick={logIn}>Log In</button>
             </form>
             <button className="login__modalGoogleLogIn" onClick={signInWithGoogle}>Log in with google</button>

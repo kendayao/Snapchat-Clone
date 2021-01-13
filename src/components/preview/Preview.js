@@ -2,6 +2,7 @@ import React, {useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import { useHistory } from 'react-router-dom';
 import {resetCameraImage, selectCameraImage} from '../../features/cameraSlice'
+import {selectUser} from '../../features/appSlice'
 import './Preview.css'
 import CloseIcon from '@material-ui/icons/Close';
 import TextFieldsIcon from '@material-ui/icons/TextFields';
@@ -21,7 +22,8 @@ function Preview() {
     const cameraImage=useSelector(selectCameraImage);
     const history=useHistory();
     const dispatch = useDispatch()
-
+    const user = useSelector(selectUser)
+    console.log(user)
     useEffect(()=>{
         if(!cameraImage){
             history.replace('/')
@@ -43,9 +45,9 @@ function Preview() {
             .then(url=>{
                 db.collection('posts').add({
                     imageUrl: url,
-                    username: 'Ken',
+                    username: user.username,
                     read: false,
-                    // profilePic
+                    profilePic: user.profilePic,
                     timestamp: firebase.firestore.FieldValue.serverTimestamp()
                 });
                 history.replace('/chats');

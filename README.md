@@ -63,7 +63,7 @@ For any questions, please contact kendayao at kendayao@gmail.com
 
 ## Deployed Application URL
 
-Deployed application link: https://instagram-clone-bf736.web.app/
+Deployed application link: https://snapchat-clone-5d40f.web.app
 
 Video demo link: https://giphy.com/gifs/elyXzLN5eKt38UE67X/fullscreen
 

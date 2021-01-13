@@ -10,3 +10,9 @@
     cursor: pointer;
     color: white;
 }
+
+@media (max-width: 500px){
+    .webcamCapture__button{
+        color: lightgray;
+    }
+}

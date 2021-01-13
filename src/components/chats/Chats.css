@@ -31,9 +31,10 @@
     font-size: 13px !important;
 }
 
-.chats_chatIcon{
+.chats_exitIcon{
     color: white;
-    font-size: 13px !important;
+    font-size: 16px !important;
+    cursor: pointer;
 }
 
 .chats__takePicIcon{

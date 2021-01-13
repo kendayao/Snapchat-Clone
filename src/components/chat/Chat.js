@@ -1,10 +1,10 @@
 import React from 'react'
 import './Chat.css'
 import { useDispatch } from 'react-redux';
+import {selectImage} from '../../features/appSlice'
 import { Avatar } from '@material-ui/core'
 import StopRoundedIcon from '@material-ui/icons/StopRounded';
 import ReactTimeago from 'react-timeago';
-import {selectImage} from '../../features/appSlice'
 import { useHistory } from 'react-router-dom';
 import { db } from '../../firebase'
 

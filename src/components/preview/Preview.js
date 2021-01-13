@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react'
+import './Preview.css'
 import {useSelector, useDispatch} from 'react-redux'
-import { useHistory } from 'react-router-dom';
 import {resetCameraImage, selectCameraImage} from '../../features/cameraSlice'
 import {selectUser} from '../../features/appSlice'
-import './Preview.css'
+import { useHistory } from 'react-router-dom';
 import CloseIcon from '@material-ui/icons/Close';
 import TextFieldsIcon from '@material-ui/icons/TextFields';
 import CreateIcon from '@material-ui/icons/Create';
@@ -14,8 +14,8 @@ import CropIcon from '@material-ui/icons/Crop';
 import TimerIcon from '@material-ui/icons/Timer';
 import SendIcon from '@material-ui/icons/Send';
 import { v4 as uuid} from 'uuid'
-import {storage,db} from '../../firebase'
 import firebase from 'firebase'
+import {storage,db} from '../../firebase'
 
 
 function Preview() {
@@ -23,7 +23,9 @@ function Preview() {
     const history=useHistory();
     const dispatch = useDispatch()
     const user = useSelector(selectUser)
+
     console.log(user)
+
     useEffect(()=>{
         if(!cameraImage){
             history.replace('/')
@@ -69,8 +71,8 @@ function Preview() {
                 <TimerIcon/>
             </div>
             <img src={cameraImage} alt='camera snap'/>
-            <div className='preview__footer'>
-                <h2 onClick={sendPost}>Send Now</h2>
+            <div className='preview__footer' onClick={sendPost}>
+                <h2 >Send Now</h2>
                 <SendIcon fontSize='small' className='preview__sendIcon'/>
             </div>
         </div>

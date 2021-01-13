@@ -1,4 +1,8 @@
 import React, { useEffect } from 'react';
+import Preview from './components/preview/Preview'
+import Chats from './components/chats/Chats'
+import ChatView from './components/chat-view/ChatView'
+import Login from './components/login/Login'
 import './App.css';
 import WebcamCapture from './components/webcam-capture/WebcamCapture'
 import {
@@ -6,20 +10,16 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import Preview from './components/preview/Preview'
-import Chats from './components/chats/Chats'
-import ChatView from './components/chat-view/ChatView'
-import { selectUser, login, logout } from './features/appSlice';
-import { useSelector, useDispatch } from 'react-redux'
-import Login from './components/login/Login'
 import {auth} from './firebase'
+import { useSelector, useDispatch } from 'react-redux'
+import { selectUser, login, logout } from './features/appSlice';
 
 function App() {
   const user = useSelector(selectUser)
   const dispatch = useDispatch()
 
   useEffect(()=>{
-    auth.onAuthStateChanged((authUser)=>{
+    const unsubscribe=auth.onAuthStateChanged((authUser)=>{
       console.log(authUser)
       if(authUser){
         dispatch(login({
@@ -31,6 +31,9 @@ function App() {
         dispatch(logout())
       }
     })
+    return()=>{
+      unsubscribe();
+    }
   }, [])
 
   return (

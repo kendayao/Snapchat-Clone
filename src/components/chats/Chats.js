@@ -1,16 +1,15 @@
 import React, {useState, useEffect} from 'react'
 import './Chats.css'
+import Chat from '../chat/Chat'
 import { Avatar } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search';
-import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
-import Chat from '../chat/Chat'
-import { db } from '../../firebase'
-import {selectUser} from '../../features/appSlice'
-import {auth} from '../../firebase'
-import { useDispatch, useSelector } from 'react-redux'
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
-import { useHistory } from 'react-router-dom';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { db, auth } from '../../firebase'
+import { useDispatch, useSelector } from 'react-redux'
+import {selectUser} from '../../features/appSlice'
 import { resetCameraImage } from '../../features/cameraSlice';
+import { useHistory } from 'react-router-dom';
 
 
 function Chats() {
@@ -20,6 +19,7 @@ function Chats() {
     const user = useSelector(selectUser);
     const dispatch=useDispatch();
     const history=useHistory();
+    console.log(user)
 
     useEffect(()=>{
         db.collection('posts').orderBy('timestamp', 'desc').onSnapshot(snapshot=>
@@ -40,7 +40,7 @@ function Chats() {
         history.push('/')
     }
 
-    const filteredPosts=posts.filter(post=>post.data.username.toLowerCase().includes(friend.toLowerCase()))
+    const filteredPosts=posts.filter(post=>post.data.username?.toLowerCase().includes(friend.toLowerCase()))
 
     return (
         <div className='chats'>
@@ -50,7 +50,7 @@ function Chats() {
                     <SearchIcon className='chats__searchIcon' />
                     <input placeholder="Friends" onChange={handleChange} value={friend} type="text" />
                 </div>
-                <ChatBubbleIcon className='chats_chatIcon' />
+                <ExitToAppIcon onClick={()=>auth.signOut()} className='chats_exitIcon' />
             </div>
             <div className='chats__posts'>
                 {filteredPosts.map(post=>(

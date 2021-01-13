@@ -1,17 +1,17 @@
 .login__container > img {
     height: 300px;
     object-fit: contain;
-    
 } 
 
 .login__container{
     display: flex;
     flex-direction: column;
-    width: 50%;
-    max-width: 370px;
+    width: 280px;
+    height: 500px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 10%;
+    position: relative;
 }
 
  .login{
@@ -20,6 +20,9 @@
 }
 
 .login__buttonLogIn{
+    position: absolute;
+    bottom: 41px;
+    width: 100%;
     background-color: #D94A57;
     color: white;
     border: none;
@@ -37,6 +40,9 @@
     font-size: 18px;
     font-weight: 500;
     cursor: pointer;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
 } 
 
 .login__buttonLogIn:focus,
@@ -45,8 +51,14 @@
 }
 
 /* modal styling */
+
+.login__modalCloseIcon{
+    margin-left: 260px;
+    cursor: pointer;
+}
+
 .login__modalImage{
-    width: 50px;
+    width: 65px;
     object-fit: contain;
     margin-bottom: 20px;
 }
@@ -116,10 +128,21 @@
     margin-bottom: 5px;
 }
 
+.login__modalButton:focus,
+.login__modalGoogleLogIn:focus{
+    outline: none;
+}
+
 .login__modal-link{
     cursor: pointer;
+    padding-bottom: 5px;
+}
+
+.login__modal-link:hover{
+    border-bottom: 2px solid #fefc01 ;
 }
 
 .login__modalText{
     color: rgb(0, 0, 0);
+    text-align: center;
 }

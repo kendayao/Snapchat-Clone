@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import './Login.css'
 import { useDispatch } from 'react-redux';
-import {Button} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal'
+import CloseIcon from '@material-ui/icons/Close';
 import {auth, provider} from '../../firebase'
 import {login} from '../../features/appSlice'
 
@@ -38,6 +38,9 @@ function Login() {
     const [modalStyle] = React.useState(getModalStyle);
     const [openLogIn, setOpenLogIn]=useState(false);
     const [OpenSignUp, setOpenSignUp]=useState(false);
+    const [username, setUsername]=useState('');
+    const [email, setEmail]=useState('');
+    const [password, setPassword]=useState('');
 
     const signInWithGoogle=()=>{
         auth.signInWithPopup(provider)
@@ -47,7 +50,34 @@ function Login() {
                 profilePic: result.user.photoURL,
                 id: result.user.uid
             }))
+            setOpenLogIn(false)
         }).catch(error=>alert(error.message))
+    }
+
+    const signUp = (event) =>{
+      event.preventDefault();
+      auth.createUserWithEmailAndPassword(email, password)
+      .then(authUser=>{
+        authUser.user.updateProfile({
+          displayName: username
+        }).then(()=>{
+            dispatch(login({
+              username: authUser.user.displayName,
+              profilePic: authUser.user.photoURL,
+              id: authUser.user.uid
+          })
+        )
+      })
+    })
+      .catch((error)=>alert(error.message))
+    }
+
+    const logIn = (event) =>{
+      event.preventDefault();
+      auth.signInWithEmailAndPassword(email, password).catch(error=>alert(error.message))
+        setEmail('')
+        setPassword('')
+        setOpenLogIn(false)
     }
 
 //     <div className='login__container'>
@@ -64,19 +94,20 @@ function Login() {
       >
          <div style={modalStyle} className={classes.paper}>
            <div className="login__modalContainer">
+             <CloseIcon onClick={()=>setOpenLogIn(false)} fontSize='small' className='login__modalCloseIcon'/>
             <center>
-              <img className="login__modalImage" src="https://static.wikia.nocookie.net/logopedia/images/d/d1/Snapchat_Ghost.svg/revision/latest?cb=20171018115934" alt="snapchat logo" /> 
+              <img className="login__modalImage" src="https://lakeridgenewsonline.com/wp-content/uploads/2020/04/snapchat.jpg" alt="snapchat logo" /> 
             </center>
             <form className='login__modalForm'>
             <p className='login__modalFormTitle'>Log into Snapchat</p>
-                <label>EMAIL</label>
-              <input ></input>
-              <label>PASSWORD</label>
-              <input ></input>
-              <button className="login__modalButton" type="submit">Log In</button>
-              <p className="login__modalText">Don't have an account?<span className="login__modal-link"> Sign Up</span></p>
+              <label htmlFor='email'>EMAIL</label>
+              <input id='email' type='email' value={email} onChange={event=>setEmail(event.target.value)}></input>
+              <label htmlFor='password'>PASSWORD</label>
+              <input id='password' type='password' value={password} onChange={event=>setPassword(event.target.value)}></input>
+              <button className="login__modalButton" type="submit" onClick={logIn}>Log In</button>
             </form>
             <button className="login__modalGoogleLogIn" onClick={signInWithGoogle}>Log in with google</button>
+            <p className="login__modalText">Don't have an account?<span className="login__modal-link" onClick={()=>{setOpenSignUp(true);setOpenLogIn(false)}}> Sign Up</span></p>
            </div>
          </div>
       </Modal>
@@ -87,19 +118,20 @@ function Login() {
       >
          <div style={modalStyle} className={classes.paper}>
            <div className="login__modalContainer">
+           <CloseIcon onClick={()=>setOpenSignUp(false)} fontSize='small' className='login__modalCloseIcon'/>
             <center>
-              <img className="login__modalImage" src="https://static.wikia.nocookie.net/logopedia/images/d/d1/Snapchat_Ghost.svg/revision/latest?cb=20171018115934" alt="snapchat logo" /> 
+              <img className="login__modalImage" src="https://lakeridgenewsonline.com/wp-content/uploads/2020/04/snapchat.jpg" alt="snapchat logo" /> 
             </center>
             <form className='login__modalForm'>
             <p className='login__modalFormTitle'>Sign Up for Snapchat</p>
-            <label>USERNAME</label>
-              <input ></input>
-                <label>EMAIL</label>
-              <input ></input>
-              <label>PASSWORD</label>
-              <input ></input>
-              <button className="login__modalButton" type="submit">Sign Up</button>
-              <p className="login__modalText">Already have an account?<span className="login__modal-link"> Sign In</span></p>
+            <label htmlFor='username'>USERNAME</label>
+              <input id='username' type='text' value={username} onChange={event=>setUsername(event.target.value)}></input>
+                <label htmlFor='email'>EMAIL</label>
+              <input id='email' type='email' value={email} onChange={event=>setEmail(event.target.value)} ></input>
+              <label htmlFor='password'>PASSWORD</label>
+              <input id='password' type='password' value={password} onChange={event=>setPassword(event.target.value)}></input>
+              <button className="login__modalButton" type="submit" onClick={signUp}>Sign Up</button>
+              <p className="login__modalText">Already have an account?<span className="login__modal-link" onClick={()=>{setOpenLogIn(true);setOpenSignUp(false)}}> Log In</span></p>
             </form>
            </div>
          </div>

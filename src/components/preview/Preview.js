@@ -24,11 +24,9 @@ function Preview() {
     const dispatch = useDispatch()
     const user = useSelector(selectUser)
 
-    console.log(user)
-
     useEffect(()=>{
         if(!cameraImage){
-            history.replace('/')
+            history.replace('/webcam')
         }
     },[cameraImage, history])
 
@@ -52,7 +50,7 @@ function Preview() {
                     profilePic: user.profilePic,
                     timestamp: firebase.firestore.FieldValue.serverTimestamp()
                 });
-                history.replace('/chats');
+                history.replace('/');
             })
         }
         )

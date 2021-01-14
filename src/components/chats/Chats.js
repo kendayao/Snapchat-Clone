@@ -19,7 +19,6 @@ function Chats() {
     const user = useSelector(selectUser);
     const dispatch=useDispatch();
     const history=useHistory();
-    console.log(user)
 
     useEffect(()=>{
         db.collection('posts').orderBy('timestamp', 'desc').onSnapshot(snapshot=>
@@ -37,7 +36,7 @@ function Chats() {
 
     const takeSnap = ()=>{
         dispatch(resetCameraImage());
-        history.push('/')
+        history.push('/webcam')
     }
 
     const filteredPosts=posts.filter(post=>post.data.username?.toLowerCase().includes(friend.toLowerCase()))

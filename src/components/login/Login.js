@@ -80,10 +80,6 @@ function Login() {
         setOpenLogIn(false)
     }
 
-//     <div className='login__container'>
-//     <img src='https://scx2.b-cdn.net/gfx/news/2017/1-snapchat.jpg' alt='snapchat logo'/>
-//     <Button variant='outlined' onClick={signIn}>Sign in</Button>
-// </div>
 
     return (
         <div className='login'>
@@ -132,6 +128,8 @@ function Login() {
               <input id='email' type='email' value={email} onChange={event=>setEmail(event.target.value)} ></input>
               <label htmlFor='password'>PASSWORD</label>
               <input id='password' type='password' value={password} onChange={event=>setPassword(event.target.value)}></input>
+              <p className='login__modal-p'>*You may use the following credentials to login or sign up with a new account*</p>
+              <p className='login__modal-p'>email: cool_coder@email.com password: 12341234</p>
               <button className="login__modalButton" type="submit" onClick={signUp}>Sign Up</button>
               <p className="login__modalText">Already have an account?<span className="login__modal-link" onClick={()=>{setOpenLogIn(true);setOpenSignUp(false)}}> Log In</span></p>
             </form>

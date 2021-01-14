@@ -44,7 +44,7 @@
     font-weight: 500;
     cursor: pointer;
     position: absolute;
-    bottom: 0.5px;
+    bottom: 0px;
     width: 100%;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
@@ -56,7 +56,6 @@
 }
 
 /* modal styling */
-
 .login__modalCloseIcon{
     margin-left: 260px;
     cursor: pointer;

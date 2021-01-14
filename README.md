@@ -65,6 +65,6 @@ For any questions, please contact kendayao at kendayao@gmail.com
 
 Deployed application link: https://snapchat-clone-5d40f.web.app
 
-Video demo link: https://giphy.com/gifs/elyXzLN5eKt38UE67X/fullscreen
+Video demo link: https://giphy.com/gifs/fZqoHZyjaRqcwqVYIB/fullscreen
 
 <img src="public/snapchat-clone.png" width="450" height="250">

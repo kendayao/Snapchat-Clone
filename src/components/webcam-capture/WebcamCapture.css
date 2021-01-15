@@ -11,7 +11,7 @@
     color: white;
 }
 
-@media (max-width: 500px){
+@media (max-width: 1050px){
     .webcamCapture__button{
         color: lightgray;
     }
